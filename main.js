@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const app = express()
 const path = require('path')
+const { json } = require('express/lib/response')
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -14,21 +15,13 @@ app.get('/', function(req,res){
     res.sendFile(path.join(__dirname + '/index.html'))
 })
 
-app.post('/api', (req, res) => {
-    console.log('[200]Post:\n', req.body)
-
+app.post('/api', (req, res) =>{
+    console.log("foi mandado: \n", req.body)
     _key = req.body.key
     _key2 = req.body.key2
 
-    res.status(200).send(
-        { 
-            success : 'true',
-            message: 'WORKING' 
-        }
-    )
+    res.status(200).send({ success: 'true', message: 'OK' })
 })
-
-
 
 //app.listen(port, () => console.log('Funcionando na porta ${port}'))
 app.listen(port, () => console.log(`Funcionando na porta ${port}`))
